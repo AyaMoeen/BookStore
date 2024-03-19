@@ -1,0 +1,29 @@
+
+services:
+  frontend: 
+    image: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      - catalog
+      - order
+
+ 
+  catalog:
+    image: catalog
+    build:
+      context: ./catalog_server
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3001"
+
+  order:
+    image: order
+    build:
+      context: ./order_server
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3001"
